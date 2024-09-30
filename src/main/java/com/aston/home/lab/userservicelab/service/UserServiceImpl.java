@@ -1,11 +1,12 @@
 package com.aston.home.lab.userservicelab.service;
 
-import com.aston.home.lab.userservicelab.model.User;
+import com.aston.home.lab.userservicelab.domain.dto.AccountDTO;
+import com.aston.home.lab.userservicelab.domain.entity.User;
+import com.aston.home.lab.userservicelab.integration.BillServiceFeignClient;
 import com.aston.home.lab.userservicelab.repository.UserServiceRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
@@ -14,6 +15,7 @@ import java.util.UUID;
 public class UserServiceImpl implements UserService {
 
     private final UserServiceRepository userServiceRepository;
+    private final BillServiceFeignClient billServiceFeignClient;
 
     @Override
     public List<User> getAllUsers() {
@@ -38,16 +40,15 @@ public class UserServiceImpl implements UserService {
         userNew.setLastName(user.getLastName());
         userServiceRepository.save(userNew);
         return userNew;
-
-    }
-
-    @Override
-    public void patchUser(UUID id, User user) {
-
     }
 
     @Override
     public void deleteUser(UUID id) {
         userServiceRepository.deleteById(id);
+    }
+
+    @Override
+    public List<AccountDTO> getAllAccountById(UUID userId) {
+        return billServiceFeignClient.getUserAccountsById(userId.toString()) ;
     }
 }

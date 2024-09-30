@@ -1,6 +1,7 @@
 package com.aston.home.lab.userservicelab.controller;
 
-import com.aston.home.lab.userservicelab.model.User;
+import com.aston.home.lab.userservicelab.domain.dto.AccountDTO;
+import com.aston.home.lab.userservicelab.domain.entity.User;
 import com.aston.home.lab.userservicelab.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RestController;
@@ -35,12 +36,12 @@ public class UserControllerImpl implements UserController {
     }
 
     @Override
-    public void patchUser(UUID id, User user) {
-
+    public void deleteUser(UUID id) {
+        userService.deleteUser(id);
     }
 
     @Override
-    public void deleteUser(UUID id) {
-        userService.deleteUser(id);
+    public List<AccountDTO> getAllAccountById(UUID userId) {
+        return userService.getAllAccountById(userId);
     }
 }

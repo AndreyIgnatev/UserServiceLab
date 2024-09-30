@@ -1,7 +1,8 @@
 package com.aston.home.lab.userservicelab.controller;
 
 
-import com.aston.home.lab.userservicelab.model.User;
+import com.aston.home.lab.userservicelab.domain.dto.AccountDTO;
+import com.aston.home.lab.userservicelab.domain.entity.User;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,9 +23,9 @@ public interface UserController {
     @PutMapping("/{id}")
     User updateUser(@PathVariable UUID id, @RequestBody User user);
 
-    @PatchMapping("/{id}")
-    void patchUser(@PathVariable UUID id, @RequestBody User user);
-
     @DeleteMapping("/{id}")
     void deleteUser(@PathVariable UUID id);
+
+    @GetMapping("/{userId}/accounts")
+    List<AccountDTO> getAllAccountById(@PathVariable UUID userId);
 }

@@ -1,6 +1,6 @@
 package com.aston.home.lab.userservicelab.repository;
 
-import com.aston.home.lab.userservicelab.model.User;
+import com.aston.home.lab.userservicelab.domain.entity.User;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
